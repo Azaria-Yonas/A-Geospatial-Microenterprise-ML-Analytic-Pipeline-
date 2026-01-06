@@ -7,12 +7,14 @@ from zcta import get_zcta
 from boundingBox import find_bbox
 from insert import insertIntoLocations
 
+DB_NAME = "fifthrun"
 DB_KEY = os.getenv("dbKey")
 USER = os.getenv("psqlUser")
 url = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/PUMA_TAD_TAZ_UGA_ZCTA/MapServer/11/query?where=ZCTA5='{}'&returnGeometry=true&outSR=4326&f=pjson"
-zcta = get_zcta("fourthrun",USER, DB_KEY)
 
 
+
+zcta = get_zcta(DB_NAME,USER, DB_KEY)
 
 async def get_tasks (session, z):
     async with session.get(url.format(z), ssl=False) as session:
@@ -26,7 +28,7 @@ async def initialize_table():
 
         for z, response in results:
             bbox = find_bbox(response)
-            insertIntoLocations(z, bbox, "fourthrun", USER, DB_KEY)
+            insertIntoLocations(z, bbox, DB_NAME, USER, DB_KEY)
 
 
 asyncio.run(initialize_table())

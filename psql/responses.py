@@ -1,0 +1,11 @@
+import psycopg
+from . import DB_NAME, USERNAME, DB_KEY
+
+def insert_response(zcta, api, response):
+    with psycopg.connect(f"dbname={DB_NAME} user={USERNAME} password={DB_KEY}") as conn:
+        with conn.cursor() as curr:
+            curr.execute("""
+                INSERT INTO responses (zcta, api, response) 
+                VALUES (%s, %s, %s);
+            """ 
+            (zcta, api, response))

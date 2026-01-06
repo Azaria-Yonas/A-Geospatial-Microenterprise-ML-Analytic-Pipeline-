@@ -1,11 +1,10 @@
 import psycopg
+from . import DB_NAME, USERNAME, DB_KEY
 
-
-
-def get_zcta (name, user, key, lbound = None, ubound = None):
+def get_zcta (lbound = None, ubound = None):
     zcta= []
 
-    with psycopg.connect(f"dbname={name} user={user} password={key}") as conn:
+    with psycopg.connect(f"dbname={DB_NAME} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
 
             if ubound is None and lbound is  None:
@@ -24,12 +23,6 @@ def get_zcta (name, user, key, lbound = None, ubound = None):
                 curr.execute(f"""
                     SELECT zcta FROM zcta OFFSET {lbound} FETCH FIRST {ubound - lbound} ROWS ONLY
                 """)
-            for (zcta,) in curr: 
-                zcta.append(zcta)  
+            for (z,) in curr: 
+                zcta.append(z)  
     return zcta 
-
-
-
-
-
-

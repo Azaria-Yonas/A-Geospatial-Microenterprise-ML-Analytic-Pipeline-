@@ -45,9 +45,9 @@ def get_query (bbox):
 
 
 
-async def overpass_tasks(session, url, coordinates):
+async def overpass_tasks(session, coordinates):
     query = get_query(coordinates[1])
-    async with session.post(url, data={"data": query}) as resp:
+    async with session.post(URL, data={"data": query}) as resp:
         status = resp.status
         try: 
             response = await resp.json()        
@@ -65,9 +65,9 @@ async def overpass_tasks(session, url, coordinates):
 ###########################################
 
 
-# async def func(url, coordinates):
+# async def func( coordinates):
 #     async with aiohttp.ClientSession() as session:
-#         task = [overpass_tasks(session, url, coordinates)]
+#         task = [overpass_tasks(session, coordinates)]
 #         results = await asyncio.gather(*task)
 #         for z, r, s in results:
 #             print (z) 
@@ -77,9 +77,4 @@ async def overpass_tasks(session, url, coordinates):
 
 # coordinates = ( 98102, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
 
-# asyncio.run(func(URL, coordinates))
-
-
-
-
-
+# asyncio.run(func(coordinates))

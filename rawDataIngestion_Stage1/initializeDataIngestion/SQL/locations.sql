@@ -1,7 +1,7 @@
 CREATE TABLE locations (
-    Index_num BIGSERIAL NOT NULL,
-    ID UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    zcta INT REFERENCES zcta(zcta),
+    index_num BIGSERIAL NOT NULL,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    zcta INT UNIQUE REFERENCES zcta(zcta),
     down_lat FLOAT,
     left_long FLOAT,
     up_lat FLOAT,

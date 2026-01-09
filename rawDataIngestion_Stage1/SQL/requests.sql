@@ -12,6 +12,7 @@ CREATE TABLE requests(
     headers JSONB,
     body JSONB,
      
+    attempt INT,
     status_code INT,
     error_message TEXT,
 

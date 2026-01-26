@@ -37,15 +37,15 @@ def get_parameter(zcta):
             "B08201_002E",   # The number of households with no vehicle 
             "B25003_003E",   # The number of renter-occupied households
 
-            "B01001_011E",   # The number of male 25–29
-            "B01001_012E",   # The number of male 30–34
-            "B01001_013E",   # The number of male 35–39
-            "B01001_014E",   # The number of male 40–44
-            "B01001_035E",   # The number of female 25–29
-            "B01001_036E",   # The number of female 30–34
-            "B01001_037E",   # The number of female 35–39
-            "B01001_038E"    # The number of female 40–44
-        ]),
+            "B01001_011E",   # The number of males 25–29
+            "B01001_012E",   # The number of males 30–34
+            "B01001_013E",   # The number of males 35–39
+            "B01001_014E",   # The number of males 40–44
+            "B01001_035E",   # The number of females 25–29
+            "B01001_036E",   # The number of females 30–34
+            "B01001_037E",   # The number of females 35–39
+            "B01001_038E"    # The number of females 40–44
+        ]), 
         "for": f"zip code tabulation area:{zcta}"
     }
 
@@ -74,14 +74,14 @@ async def census_tasks (session, zcta):
 ###########################################
 
 
-# async def func(coordinate):
-#     async with aiohttp.ClientSession() as session:
-#         tasks = [census_tasks(session, coordinate[0])]
-#         result = await asyncio.gather(*tasks)
-#         for z, r, s in result:
-#             print(f"{s}->{z}:  {r}")
+async def func(coordinate):
+    async with aiohttp.ClientSession() as session:
+        tasks = [census_tasks(session, coordinate[0])]
+        result = await asyncio.gather(*tasks)
+        for z, r, s in result:
+            print(f"{s}->{z}:  {r}")
 
 
-# coordinates = ( 98102, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
+coordinates = ( 98102, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
 
-# asyncio.run(func(coordinates))
+asyncio.run(func(coordinates))

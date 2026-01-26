@@ -8,7 +8,7 @@ def get_coordinates(lbound=None, hbound=None):
     with psycopg.connect(f"dbname={DB_NAME} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
             if lbound is None and hbound is None:
-                curr.execute(f"""
+                curr.execute("""
                     SELECT
                         zcta,
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
@@ -27,12 +27,11 @@ def get_coordinates(lbound=None, hbound=None):
             elif lbound is None and hbound is not None:
                 curr.execute(f"""
                     SELECT
-                    SELECT
                         zcta,
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
                         ROW(center_lat, center_long, radius) AS center_and_radius
                     FROM locations                    
-                    FETCH FIRST {hbound}
+                    FETCH FIRST {hbound} ROWS ONLY
                 """)
             else:
                 curr.execute(f"""

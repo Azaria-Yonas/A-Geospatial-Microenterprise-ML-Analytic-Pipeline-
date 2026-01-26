@@ -80,25 +80,27 @@ async def places_tasks(session, coordinate):
 
 
 
-###########################################
-###                                     ###
-###  This here is to test individually  ###
-###                                     ###
-###########################################
+                            ###########################################
+                            ###                                     ###
+                            ###  This here is to test individually  ###
+                            ###                                     ###
+                            ###########################################
 
 
-# async def func(coordinate):
-#     async with aiohttp.ClientSession() as session:
-#         tasks = [places_tasks(session,  coordinate)]
-#         results = await asyncio.gather(*tasks)
-#         for z ,r, s in results:
-#             if s == 200:
-#                 insert_response(z, "places", r)  
+async def func(coordinate):
+    async with aiohttp.ClientSession() as session:
+        tasks = [places_tasks(session,  coordinate)]
+        results = await asyncio.gather(*tasks)
+        for z ,r, s in results:
+            if s == 200:
+                insert_response(z, "places", r)
+            else:
+                print(r) 
 
             
-# coordinates = ( 98102, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
+coordinates = ( 98102, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
 
-# asyncio.run(func(coordinates))
+asyncio.run(func(coordinates))
 
 
 

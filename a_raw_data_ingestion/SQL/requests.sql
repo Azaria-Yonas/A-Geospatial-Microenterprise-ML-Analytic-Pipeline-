@@ -14,8 +14,8 @@ CREATE TABLE requests(
     body JSONB,
      
     
-    date_time TIMESTAMPTZ DEFAULT now()
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    date_time TIMESTAMPTZ DEFAULT now(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid()
 );
 
 
